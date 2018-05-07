@@ -17,6 +17,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApi", "WebApis\TodoApi\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApiSwUI", "WebApis\TodoApiSwUI\TodoApiSwUI.csproj", "{275571BC-29BE-4C9E-A960-C28DF6B1AA8E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EFCore", "EFCore", "{00900654-EC2B-40D6-BD6F-4ABFF9613E6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoUniversity", "EFCore\ContosoUniversity\ContosoUniversity.csproj", "{D323B0F6-99EF-4079-9671-DFE875217258}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,10 @@ Global
 		{275571BC-29BE-4C9E-A960-C28DF6B1AA8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{275571BC-29BE-4C9E-A960-C28DF6B1AA8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{275571BC-29BE-4C9E-A960-C28DF6B1AA8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D323B0F6-99EF-4079-9671-DFE875217258}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D323B0F6-99EF-4079-9671-DFE875217258}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D323B0F6-99EF-4079-9671-DFE875217258}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D323B0F6-99EF-4079-9671-DFE875217258}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +56,7 @@ Global
 		{F6FF6891-631D-42F9-B548-3C3CD8A66E01} = {E97B6AE3-C12E-4BC7-AA1E-43323B15FA7B}
 		{83DEA4DE-5133-434E-8024-AAC6D5216A5C} = {4F25D943-2B54-4DFA-B225-8A4B92628B35}
 		{275571BC-29BE-4C9E-A960-C28DF6B1AA8E} = {4F25D943-2B54-4DFA-B225-8A4B92628B35}
+		{D323B0F6-99EF-4079-9671-DFE875217258} = {00900654-EC2B-40D6-BD6F-4ABFF9613E6F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6BABB2AB-6681-41B7-A6D1-1C3A064B346F}
