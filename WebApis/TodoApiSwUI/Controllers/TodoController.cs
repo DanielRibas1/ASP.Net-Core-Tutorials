@@ -5,6 +5,7 @@ using TodoApi.Models;
 
 namespace TodoApi.Controllers
 {
+    [Produces("application/json")]  
     [Route("api/todo")]
     public class TodoController : ControllerBase
     {
@@ -38,7 +39,27 @@ namespace TodoApi.Controllers
             return Ok(item);
         }
 
+        /// <summary>
+        /// Creates a TodoItem.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /Todo
+        ///     {
+        ///        "id": 1,
+        ///        "name": "Item1",
+        ///        "isComplete": true
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="item"></param>
+        /// <returns>A newly created TodoItem</returns>
+        /// <response code="201">Returns the newly created item</response>
+        /// <response code="400">If the item is null</response>            
         [HttpPost]
+        [ProducesResponseType(typeof(TodoItem), 201)]
+        [ProducesResponseType(400)]
         public IActionResult Create([FromBody] TodoItem item)
         {
             if (item == null)
@@ -74,6 +95,10 @@ namespace TodoApi.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Deletes a specific TodoItem.
+        /// </summary>
+        /// <param name="id"></param>  
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
