@@ -5,7 +5,7 @@ using TodoApi.Models;
 
 namespace TodoApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/todo")]
     public class TodoController : ControllerBase
     {
         private readonly TodoContext _context;
@@ -19,6 +19,23 @@ namespace TodoApi.Controllers
                 _context.TodoItems.Add(new TodoItem { Name = "Item1" });
                 _context.SaveChanges();
             }
+        }
+
+        [HttpGet]
+        public List<TodoItem> GetAll()
+        {
+            return _context.TodoItems.ToList();
+        }
+
+        [HttpGet("{id}", Name = "GetTodo")]
+        public IActionResult GetById(long id)
+        {
+            var item = _context.TodoItems.Find(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            return Ok(item);
         }
     }
 }
