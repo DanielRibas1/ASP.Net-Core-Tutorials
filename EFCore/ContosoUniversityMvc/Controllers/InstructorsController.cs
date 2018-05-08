@@ -180,16 +180,24 @@ namespace ContosoUniversityMvc.Controllers
             return View(instructor);
         }
 
-        // POST: Instructors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var instructor = await _context.Instructors.SingleOrDefaultAsync(m => m.ID == id);
+            Instructor instructor = await _context.Instructors
+                .Include(i => i.CourseAssignments)
+                .SingleAsync(i => i.ID == id);
+
+            var departments = await _context.Departments
+                .Where(d => d.InstructorID == id)
+                .ToListAsync();
+            departments.ForEach(d => d.InstructorID = null);
+
             _context.Instructors.Remove(instructor);
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }       
+        }
 
         private void PopulateAssignedCourseData(Instructor instructor)
         {
