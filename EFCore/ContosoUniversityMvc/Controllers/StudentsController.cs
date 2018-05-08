@@ -122,8 +122,7 @@ namespace ContosoUniversityMvc.Controllers
             return View(studentToUpdate);
         }
 
-        // GET: Students/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
@@ -131,29 +130,46 @@ namespace ContosoUniversityMvc.Controllers
             }
 
             var student = await _context.Students
+                .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (student == null)
             {
                 return NotFound();
             }
 
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Delete failed. Try again, and if the problem persists " +
+                    "see your system administrator.";
+            }
+
             return View(student);
         }
 
-        // POST: Students/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var student = await _context.Students.SingleOrDefaultAsync(m => m.ID == id);
-            _context.Students.Remove(student);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var student = await _context.Students
+                .AsNoTracking()
+                .SingleOrDefaultAsync(m => m.ID == id);
+            if (student == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
 
-        private bool StudentExists(int id)
-        {
-            return _context.Students.Any(e => e.ID == id);
+            try
+            {
+                _context.Students.Remove(student);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException /* ex */)
+            {
+                //Log the error (uncomment ex variable name and write a log.)
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+            }
         }
     }
 }
